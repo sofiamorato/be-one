@@ -52,4 +52,8 @@ export class TasksService {
     this.tasks = this.tasks.filter((t) => t.id !== id);
     return task;
   }
+
+  findByStatus(status: string) {
+    return this.tasks.filter((t) => t.status === status);
+}
 }

@@ -14,7 +14,18 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { Controller } from '@nestjs/common';
-// TODO: import the decorators you need (Get, Post, Patch, Delete, Param, Body, etc.)
+import {
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  ParseIntPipe,
+  HttpCode,
+  HttpStatus,
+  Query
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -23,28 +34,33 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  // TODO: GET /tasks
-  findAll() {
-    return this.tasksService.findAll();
-  }
+  @Get()
+    findAll(@Query('status') status?: string) {
+      if (status) return this.tasksService.findByStatus(status);
+      return this.tasksService.findAll();
+    }
 
-  // TODO: GET /tasks/:id
-  findOne(id: number) {
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.tasksService.findOne(id);
   }
 
-  // TODO: POST /tasks  (status 201)
-  create(createTaskDto: CreateTaskDto) {
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() createTaskDto: CreateTaskDto) {
     return this.tasksService.create(createTaskDto);
   }
 
-  // TODO: PATCH /tasks/:id
-  update(id: number, updateTaskDto: UpdateTaskDto) {
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateTaskDto: UpdateTaskDto,
+  ) {
     return this.tasksService.update(id, updateTaskDto);
   }
 
-  // TODO: DELETE /tasks/:id
-  remove(id: number) {
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.tasksService.remove(id);
   }
 }
