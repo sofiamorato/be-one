@@ -8,4 +8,5 @@ export declare class TasksController {
     findOne(id: number): import("./tasks.service").Task;
     create(createTaskDto: CreateTaskDto): import("./tasks.service").Task;
     update(id: number, updateTaskDto: UpdateTaskDto): import("./tasks.service").Task;
-    remove(id: number): import("./tasks.ser
+    remove(id: number): import("./tasks.service").Task;
+}
