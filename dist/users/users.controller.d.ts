@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
+    findAll(): import("./users.service").User[];
     findByEmail(email: string): import("./users.service").User;
     findOne(id: number): import("./users.service").User;
     create(createUserDto: CreateUserDto): import("./users.service").User;

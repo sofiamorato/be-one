@@ -21,6 +21,9 @@ let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
+    findAll() {
+        return this.usersService.findAll();
+    }
     findByEmail(email) {
         return this.usersService.findByEmail(email);
     }
@@ -38,6 +41,12 @@ let UsersController = class UsersController {
     }
 };
 exports.UsersController = UsersController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('search'),
     __param(0, (0, common_1.Query)('email')),
